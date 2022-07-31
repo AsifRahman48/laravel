@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\Asif;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/a/{d}', function ($d) {
-    echo $d;
-    return view('first');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('user/{id}', [Asif::class, 'test']);
-
-//Route::get('/asif/{id}', test($id)) ;
+require __DIR__.'/auth.php';
