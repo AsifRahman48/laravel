@@ -1,4 +1,5 @@
 @extends('layout')
+<a href="{{ route('dashboard') }}">Back</a><br/><br/>
 <h1>About Us</h1>
 
 @section('title','about')

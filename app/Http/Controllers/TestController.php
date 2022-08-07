@@ -36,13 +36,13 @@ class TestController extends Controller
 
         $request->validate([
             'name'=>'required',
-            'address'=>'required',
-            'file'=>'required|mimes:jpeg,png|max:1024'
+            'address'=>'required'
+            //'file'=>'required|mimes:jpeg,png|max:1024'
         ]);
-       // $x=$request->post('name');
-        //$y=$x."</br>".$request->post('address');
-     //  return $y;
+        $x=$request->post('name');
+        $y=$x."</br>".$request->post('address');
+       return $y;
 
-      echo  $request->file('file')->store('media');
+      //echo  $request->file('file')->store('media');
       }
  }
