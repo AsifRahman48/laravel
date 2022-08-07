@@ -26,7 +26,7 @@ class TodoController extends Controller
         $res->name=$request->input('name');
         $res->address=$request->input('address');
         $res->save();
-        $request->session()->flush('msg','Data insert Successfully');
+        $request->session()->flash('msg','Data insert Successfully');
         return redirect('todo_show');
     }
 
@@ -49,7 +49,7 @@ class TodoController extends Controller
         $res->name=$request->input('name');
         $res->address=$request->input('address');
         $res->save();
-        $request->session()->flush('msg','Data Updated');
+        $request->session()->flash('msg','Data Updated');
         return redirect('todo_show');
     }
 
