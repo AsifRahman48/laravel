@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+//use Faker\Core\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class TodoController extends Controller
 {
 
     public function index()
     {
-        //
+        return Storage::delete('asif1.jpg');
     }
 
 
@@ -22,9 +25,24 @@ class TodoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required'
+        ]);
+
+
         $res=new Todo;
         $res->name=$request->input('name');
         $res->address=$request->input('address');
+
+        if($request->hasFile('profile_image'))
+        {
+            $file=$request->file('profile_image');
+            $extension=$file->getClientOriginalExtension();
+            $filename=time().'.'.$extension;
+            $file->move('uploads/students/',$filename);
+            $res->profile_image=$filename;
+        }
         $res->save();
         $request->session()->flash('msg','Data insert Successfully');
         return redirect('todo_show');
@@ -48,6 +66,24 @@ class TodoController extends Controller
         $res=Todo::find($request->id);
         $res->name=$request->input('name');
         $res->address=$request->input('address');
+
+        if($request->hasFile('profile_image'))
+        {
+           // if($request->post('id')>0) {
+              //  $arrImage=DB::table('todos')->where(['id'=>$request->post('id')])->get();
+                $destination = 'uploads/students/' .$res->profile_image;
+                if (File::exists($destination))
+                {
+                    File::delete($destination);
+                }
+         //   }
+
+            $file=$request->file('profile_image');
+            $extension=$file->getClientOriginalExtension();
+            $filename=time().'.'.$extension;
+            $file->move('uploads/students/',$filename);
+            $res->profile_image=$filename;
+        }
         $res->save();
         $request->session()->flash('msg','Data Updated');
         return redirect('todo_show');
@@ -56,7 +92,14 @@ class TodoController extends Controller
 
     public function destroy( $id)
     {
+        $res=Todo::find($id);
+        $destination = 'uploads/students/' .$res->profile_image;
+        if (File::exists($destination))
+        {
+            File::delete($destination);
+        }
         Todo::destroy(array('id',$id));
-        return redirect('todo_show');
+
+        return redirect('todo_show')->with('msg','Data Deleted');
     }
 }

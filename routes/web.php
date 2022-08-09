@@ -35,6 +35,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/about',[TestController::class,'about'])->name('about');
     Route::post('/NameSubmit',[TestController::class,'form'])->name('form');
     Route::get('/header',[TestController::class,'header'])->name('header');
+
+
     Route::get('/todo_show',[TodoController::class,'show'])->name('todo.show');
     Route::get('/todo_delete/{id}',[TodoController::class,'destroy'])->name('todo.delete');
     Route::get('/todo_create',[TodoController::class,'create'])->name('todo.create');
@@ -54,3 +56,4 @@ Route::get('home_home',function (){
 //Route::post('/todo_store',[TodoController::class,'store'])->name('todo.store');
 //Route::get('/todo_edit/{id}',[TodoController::class,'edit'])->name('todo.edit');
 //Route::post('/todo_update/{id}',[TodoController::class,'update'])->name('todo.update');
+Route::get('/index',[TodoController::class,'index'])->name('todo.index');

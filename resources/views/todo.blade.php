@@ -13,6 +13,7 @@
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Address</th>
+            <th scope="col">Profile Image</th>
             <th scope="col">Created At</th>
             <th scope="col">Action</th>
         </tr>
@@ -23,6 +24,9 @@
             <td scope="col">{{$list->id}}</td>
             <td scope="col">{{$list->name}}</td>
             <td scope="col">{{$list->address}}</td>
+            <td>
+                <img src="{{ asset('uploads/students/'.$list->profile_image) }}" width="70px" height="70px" alt="Image">
+            </td>
             <td scope="col">{{$list->created_at}}</td>
             <td scope="col">
                     <a href="{{ route('todo.delete',$list->id) }}" class="delete">Delete</a>
