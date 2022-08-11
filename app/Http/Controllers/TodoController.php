@@ -40,7 +40,7 @@ class TodoController extends Controller
             $file=$request->file('profile_image');
             $extension=$file->getClientOriginalExtension();
             $filename=time().'.'.$extension;
-            $file->move('uploads/students/',$filename);
+            $file->storeAs('public/Image/',$filename);
             $res->profile_image=$filename;
         }
         $res->save();
@@ -69,19 +69,19 @@ class TodoController extends Controller
 
         if($request->hasFile('profile_image'))
         {
-           // if($request->post('id')>0) {
-              //  $arrImage=DB::table('todos')->where(['id'=>$request->post('id')])->get();
-                $destination = 'uploads/students/' .$res->profile_image;
-                if (File::exists($destination))
-                {
-                    File::delete($destination);
-                }
-         //   }
+            // if($request->post('id')>0) {
+            //  $arrImage=DB::table('todos')->where(['id'=>$request->post('id')])->get();
+            $destination = 'public/Image/' .$res->profile_image;
+            if (Storage::exists($destination))
+            {
+                Storage::delete($destination);
+            }
+            //   }
 
             $file=$request->file('profile_image');
             $extension=$file->getClientOriginalExtension();
             $filename=time().'.'.$extension;
-            $file->move('uploads/students/',$filename);
+            $file->storeAs('public/Image/',$filename);
             $res->profile_image=$filename;
         }
         $res->save();
@@ -93,10 +93,10 @@ class TodoController extends Controller
     public function destroy( $id)
     {
         $res=Todo::find($id);
-        $destination = 'uploads/students/' .$res->profile_image;
-        if (File::exists($destination))
+        $destination = 'public/Image/' .$res->profile_image;
+        if (Storage::exists($destination))
         {
-            File::delete($destination);
+            Storage::delete($destination);
         }
         Todo::destroy(array('id',$id));
 

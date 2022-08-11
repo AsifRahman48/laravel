@@ -25,7 +25,7 @@
             <td scope="col">{{$list->name}}</td>
             <td scope="col">{{$list->address}}</td>
             <td>
-                <img src="{{ asset('uploads/students/'.$list->profile_image) }}" width="70px" height="70px" alt="Image">
+                <img src="{{ asset('storage/Image/'.$list->profile_image) }}" width="70px" height="70px" alt="Image">
             </td>
             <td scope="col">{{$list->created_at}}</td>
             <td scope="col">

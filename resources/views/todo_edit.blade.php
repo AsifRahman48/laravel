@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">Image</label>
                 <input type="file" name="profile_image" class="form-control" id="profile_image" aria-describedby="emailHelp" />
-                <img src="{{ asset('uploads/students/'.$todoArr->profile_image) }}" width="70px" height="70px" alt="Image">
+                <img src="{{ asset('storage/Image/'.$todoArr->profile_image) }}" width="70px" height="70px" alt="Image">
             </div>
             <div class="form-group">
                 <td></td>
