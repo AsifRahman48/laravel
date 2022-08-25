@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\ActionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('/todo_store',[TodoController::class,'store'])->name('todo.store');
     Route::get('/todo_edit/{id}',[TodoController::class,'edit'])->name('todo.edit');
     Route::post('/todo_update/{id}',[TodoController::class,'update'])->name('todo.update');
+    Route::get('/move/{id}',[ActionController::class,'move'])->name('action.move');
+    Route::get('/copy/{id}',[ActionController::class,'copy'])->name('action.copy');
+    Route::get('/download/{id}',[ActionController::class,'download'])->name('action.download');
 });
 //require __DIR__.'/auth.php';
 //Route::get('/test',[TestController::class,'testing']);
@@ -57,3 +61,8 @@ Route::get('home_home',function (){
 //Route::get('/todo_edit/{id}',[TodoController::class,'edit'])->name('todo.edit');
 //Route::post('/todo_update/{id}',[TodoController::class,'update'])->name('todo.update');
 Route::get('/index',[TodoController::class,'index'])->name('todo.index');
+
+//Route::get('/move/{id}',[ActionController::class,'move'])->name('action.move');
+//Route::get('/copy/{id}',[ActionController::class,'copy'])->name('action.copy');
+//Route::get('/download/{id}',[ActionController::class,'download'])->name('action.download');
+Route::get('/action_index',[ActionController::class,'index']);

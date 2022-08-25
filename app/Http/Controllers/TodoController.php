@@ -40,8 +40,9 @@ class TodoController extends Controller
             $file=$request->file('profile_image');
             $extension=$file->getClientOriginalExtension();
             $filename=time().'.'.$extension;
-            $file->storeAs('public/Image/',$filename);
-            $res->profile_image=$filename;
+            $path=Storage::disk('public')->put("Image",$file);
+            $res->profile_image=$path;
+
         }
         $res->save();
         $request->session()->flash('msg','Data insert Successfully');
@@ -69,20 +70,18 @@ class TodoController extends Controller
 
         if($request->hasFile('profile_image'))
         {
-            // if($request->post('id')>0) {
-            //  $arrImage=DB::table('todos')->where(['id'=>$request->post('id')])->get();
-            $destination = 'public/Image/' .$res->profile_image;
-            if (Storage::exists($destination))
+
+            $destination =$res->profile_image;
+            if (Storage::disk('public')->exists($destination))
             {
-                Storage::delete($destination);
+                Storage::disk('public')->delete($destination);
             }
-            //   }
 
             $file=$request->file('profile_image');
             $extension=$file->getClientOriginalExtension();
             $filename=time().'.'.$extension;
-            $file->storeAs('public/Image/',$filename);
-            $res->profile_image=$filename;
+            $path=Storage::disk('public')->put("Image",$file);
+            $res->profile_image=$path;
         }
         $res->save();
         $request->session()->flash('msg','Data Updated');
@@ -93,10 +92,10 @@ class TodoController extends Controller
     public function destroy( $id)
     {
         $res=Todo::find($id);
-        $destination = 'public/Image/' .$res->profile_image;
-        if (Storage::exists($destination))
+        $destination =$res->profile_image;
+        if (Storage::disk('public')->exists($destination))
         {
-            Storage::delete($destination);
+            Storage::disk('public')->delete($destination);
         }
         Todo::destroy(array('id',$id));
 

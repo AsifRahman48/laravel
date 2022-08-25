@@ -25,12 +25,16 @@
             <td scope="col">{{$list->name}}</td>
             <td scope="col">{{$list->address}}</td>
             <td>
-                <img src="{{ asset('storage/Image/'.$list->profile_image) }}" width="70px" height="70px" alt="Image">
+                <img src="{{ asset("storage/".$list->profile_image )}}" width="70px" height="70px" alt="Image">
             </td>
             <td scope="col">{{$list->created_at}}</td>
             <td scope="col">
                     <a href="{{ route('todo.delete',$list->id) }}" class="delete">Delete</a>
                     <a href="{{ route('todo.edit',$list->id) }}" class="edit">Edit</a>
+                    <a href="{{ route('action.move',$list->id) }}" >Move</a>
+                    <a href="{{ route('action.copy',$list->id) }}" >Copy</a>
+
+                    <a href="{{ route('action.download',$list->id) }}" >Download</a>
             </td>
         </tr>
         @endforeach
